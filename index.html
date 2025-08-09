@@ -1,106 +1,27 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Character Switch</title>
-<style>
-  body {
-    margin: 0;
-    font-family: Arial, sans-serif;
-    background-color: #222;
-    overflow: hidden;
-    transition: background-color 0.5s ease;
-  }
-
-  .buttons {
-    position: absolute;
-    top: 20px;
-    left: 20px;
-    display: flex;
-    gap: 10px;
-    z-index: 2;
-  }
-
-  button {
-    padding: 8px 15px;
-    font-size: 16px;
-    border: none;
-    border-radius: 6px;
-    cursor: pointer;
-    background-color: #fff;
-    transition: background-color 0.3s;
-  }
-
-  button:hover {
-    background-color: #ddd;
-  }
-
-  .character {
-    position: absolute;
-    max-height: 80vh;
-    max-width: 90vw;
-    opacity: 0;
-    transition: opacity 0.5s ease;
-  }
-
-  /* Slide-in animations */
-  @keyframes slideFromBottom {
-    from { transform: translateY(100%); opacity: 0; }
-    to { transform: translateY(0); opacity: 1; }
-  }
-
-  @keyframes slideFromTop {
-    from { transform: translateY(-100%); opacity: 0; }
-    to { transform: translateY(0); opacity: 1; }
-  }
-
-  @keyframes slideFromRight {
-    from { transform: translateX(100%); opacity: 0; }
-    to { transform: translateX(0); opacity: 1; }
-  }
-
-</style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Character Showcase</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
+    <div class="container">
+        <div class="card">
+            <img src="tumblr_19d2c72db0f3f0cb86b2728859d6d958_2c2fbab2_2048.png" alt="Furina" class="character">
+            <h2>Furina</h2>
+        </div>
+        <div class="card">
+            <img src="Raiden-Shogun-PNG-HD-Image.png" alt="Raiden" class="character">
+            <h2>Raiden Shogun</h2>
+        </div>
+        <div class="card">
+            <img src="Nahida-PNG-Pic.gif" alt="Nahida" class="character">
+            <h2>Nahida</h2>
+        </div>
+    </div>
 
-<div class="buttons">
-  <button onclick="showCharacter('raiden')">raiden</button>
-  <button onclick="showCharacter('nahida')">nahida</button>
-  <button onclick="showCharacter('furina')">furina</button>
-</div>
-
-<script>
-  const characters = {
-    raiden: { src: "Raiden-Shogun-PNG-HD-Image.png", anim: "slideFromBottom", bg: "#4b0082" },
-    nahida: { src: "Nahida-PNG-Pic.gif", anim: "slideFromTop", bg: "#228B22" },
-    furina: { src: "tumblr_19d2c72db0f3f0cb86b2728859d6d958_2c2fbab2_2048.png", anim: "slideFromRight", bg: "#1E90FF" }
-  };
-
-  let currentImg = null;
-
-  function showCharacter(name) {
-    // Remove old image
-    if (currentImg) {
-      currentImg.remove();
-      currentImg = null;
-    }
-
-    const char = characters[name];
-    document.body.style.backgroundColor = char.bg;
-
-    const img = document.createElement("img");
-    img.src = char.src;
-    img.className = "character";
-    img.style.animation = `${char.anim} 0.8s ease forwards`;
-    img.style.top = "50%";
-    img.style.left = "50%";
-    img.style.transform = "translate(-50%, -50%)";
-
-    document.body.appendChild(img);
-    currentImg = img;
-  }
-</script>
-
+    <script src="script.js"></script>
 </body>
 </html>

@@ -1,27 +1,96 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Character Showcase</title>
-    <link rel="stylesheet" href="style.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Character Theme Switcher</title>
+<style>
+    body {
+        margin: 0;
+        padding: 0;
+        font-family: Arial, sans-serif;
+        text-align: center;
+        background-color: #0f0f0f;
+        color: white;
+        transition: background 0.5s, color 0.5s;
+    }
+    header {
+        padding: 20px;
+    }
+    .buttons {
+        margin-bottom: 20px;
+    }
+    .buttons button {
+        padding: 10px 20px;
+        margin: 5px;
+        border: none;
+        border-radius: 8px;
+        font-size: 16px;
+        cursor: pointer;
+        transition: background 0.3s;
+    }
+    .buttons button:hover {
+        opacity: 0.8;
+    }
+    .character img, .character video {
+        width: 60%;
+        max-width: 500px;
+        border-radius: 12px;
+        margin-top: 20px;
+        transition: all 0.3s;
+    }
+</style>
 </head>
 <body>
-    <div class="container">
-        <div class="card">
-            <img src="tumblr_19d2c72db0f3f0cb86b2728859d6d958_2c2fbab2_2048.png" alt="Furina" class="character">
-            <h2>Furina</h2>
-        </div>
-        <div class="card">
-            <img src="Raiden-Shogun-PNG-HD-Image.png" alt="Raiden" class="character">
-            <h2>Raiden Shogun</h2>
-        </div>
-        <div class="card">
-            <img src="Nahida-PNG-Pic.gif" alt="Nahida" class="character">
-            <h2>Nahida</h2>
-        </div>
-    </div>
 
-    <script src="script.js"></script>
+<header>
+    <h1>Genshin Character Themes</h1>
+</header>
+
+<div class="buttons">
+    <button id="raidenBtn">Raiden Shogun</button>
+    <button id="furinaBtn">Furina</button>
+    <button id="nahidaBtn">Nahida</button>
+</div>
+
+<div class="character" id="characterDisplay">
+    <img src="Raiden-Shogun-PNG-HD-Image.png" alt="Raiden Shogun">
+</div>
+
+<script>
+    const characterDisplay = document.getElementById("characterDisplay");
+
+    const themes = {
+        raiden: {
+            bg: "#1a0033",
+            text: "white",
+            content: `<img src="Raiden-Shogun-PNG-HD-Image.png" alt="Raiden Shogun">`
+        },
+        furina: {
+            bg: "#003366",
+            text: "white",
+            content: `<img src="tumblr_19d2c72db0f3f0cb86b2728859d6d958_2c2fbab2_2048.png" alt="Furina">`
+        },
+        nahida: {
+            bg: "#004d00",
+            text: "white",
+            content: `<img src="Nahida-PNG-Pic.gif" alt="Nahida">`
+        }
+    };
+
+    function setTheme(theme) {
+        document.body.style.backgroundColor = themes[theme].bg;
+        document.body.style.color = themes[theme].text;
+        characterDisplay.innerHTML = themes[theme].content;
+    }
+
+    document.getElementById("raidenBtn").addEventListener("click", () => setTheme("raiden"));
+    document.getElementById("furinaBtn").addEventListener("click", () => setTheme("furina"));
+    document.getElementById("nahidaBtn").addEventListener("click", () => setTheme("nahida"));
+
+    // Default theme on load
+    setTheme("raiden");
+</script>
+
 </body>
 </html>

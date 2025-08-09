@@ -5,9 +5,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Genshin Impact Character Themes</title>
     <style>
-        body {
+        * {
+            box-sizing: border-box;
             margin: 0;
             padding: 0;
+        }
+
+        body {
             font-family: 'Arial', sans-serif;
             height: 100vh;
             overflow: hidden;
@@ -30,28 +34,34 @@
             background: linear-gradient(135deg, #0a1a3a 0%, #000d1f 100%);
         }
 
-        /* Character buttons */
+        /* Character buttons - Responsive */
         .character-buttons {
             position: fixed;
-            top: 30px;
+            top: 20px;
             left: 50%;
             transform: translateX(-50%);
             display: flex;
-            gap: 15px;
+            gap: 10px;
             z-index: 100;
+            padding: 0 15px;
+            width: 100%;
+            justify-content: center;
+            flex-wrap: wrap;
         }
 
         .char-btn {
             background: rgba(0, 0, 0, 0.5);
             border: 1px solid rgba(255, 255, 255, 0.3);
             color: white;
-            padding: 10px 20px;
+            padding: 8px 16px;
             border-radius: 25px;
             cursor: pointer;
             font-weight: bold;
-            font-size: 16px;
+            font-size: clamp(14px, 3vw, 16px);
             transition: all 0.3s ease;
             backdrop-filter: blur(5px);
+            min-width: 100px;
+            text-align: center;
         }
 
         .char-btn:hover {
@@ -63,7 +73,7 @@
             color: #111;
         }
 
-        /* Character container */
+        /* Character container - Responsive */
         .character-wrapper {
             position: absolute;
             width: 100%;
@@ -71,48 +81,54 @@
             display: flex;
             justify-content: center;
             align-items: center;
+            padding: 20px;
         }
 
-        /* Character image styling */
+        /* Character image styling - Responsive */
         .character-image {
             position: absolute;
+            width: auto;
+            height: auto;
             max-width: 90%;
-            max-height: 90%;
+            max-height: 70%;
             opacity: 0.4;
             z-index: 1;
             filter: brightness(1.1);
+            object-fit: contain;
         }
 
-        /* Character content - PERFECTLY CENTERED */
+        /* Character content - Responsive */
         .character-content {
             position: relative;
             z-index: 2;
             text-align: center;
-            text-shadow: 3px 3px 10px rgba(0, 0, 0, 0.9);
-            width: 90%;
+            text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.9);
+            width: 100%;
             max-width: 800px;
-            padding: 30px;
+            padding: 20px;
             display: flex;
             flex-direction: column;
             align-items: center;
         }
 
         .character-name {
-            font-size: 5rem;
+            font-size: clamp(2.5rem, 10vw, 5rem);
             font-weight: 900;
             text-transform: uppercase;
-            margin-bottom: 20px;
-            letter-spacing: 2px;
+            margin-bottom: 15px;
+            letter-spacing: 1px;
         }
 
         .character-desc {
-            font-size: 1.2rem;
-            line-height: 1.8;
+            font-size: clamp(1rem, 3vw, 1.2rem);
+            line-height: 1.6;
             background: rgba(0, 0, 0, 0.5);
-            padding: 20px;
+            padding: 15px;
             border-radius: 15px;
             backdrop-filter: blur(5px);
             border: 1px solid rgba(255, 255, 255, 0.1);
+            width: 100%;
+            max-width: 600px;
         }
 
         /* Animations */
@@ -130,7 +146,7 @@
         }
 
         @keyframes slideIn {
-            0% { transform: translateY(80px); opacity: 0; }
+            0% { transform: translateY(50px); opacity: 0; }
             100% { transform: translateY(0); opacity: 1; }
         }
 
@@ -142,9 +158,47 @@
             position: absolute;
             justify-content: center;
             align-items: center;
+            padding-bottom: 60px; /* Space for buttons */
         }
         .nahida {
             display: flex;
+        }
+
+        /* Mobile-specific adjustments */
+        @media (max-width: 768px) {
+            .character-buttons {
+                top: 10px;
+                gap: 8px;
+            }
+            .char-btn {
+                padding: 6px 12px;
+                min-width: 80px;
+            }
+            .character-image {
+                max-height: 60%;
+            }
+            .character-content {
+                padding: 10px;
+            }
+            .character-name {
+                margin-bottom: 10px;
+            }
+            .character-desc {
+                padding: 12px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .character-buttons {
+                top: 5px;
+            }
+            .character-image {
+                max-height: 50%;
+            }
+            .character-desc {
+                line-height: 1.5;
+                padding: 10px;
+            }
         }
     </style>
 </head>
@@ -160,7 +214,7 @@
     <div class="character-wrapper">
         <!-- Nahida -->
         <div class="character nahida fade-in">
-            <img src="Nahida-PNG-Pic.gif" alt="Nahida" class="character-image">
+            <img src="Nahida-PNG-Picture.gif" alt="Nahida" class="character-image">
             <div class="character-content">
                 <div class="character-name">Nahida</div>
                 <div class="character-desc">

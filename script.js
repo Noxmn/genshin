@@ -1,8 +1,8 @@
 
 // script.js
 const themes = {
-  raiden: { name: 'Raiden Shogun', bg: 'theme-raiden', img: 'https://www.pngall.com/wp-content/uploads/6/Raiden-Shogun-PNG-Image.png', words:['Raiden','Electro','Shogun'] },
-  furina: { name: 'Furina', bg: 'theme-furina', img: 'https://i.pinimg.com/originals/4b/2a/7f/4b2a7f3b7b8ae1c0b9a1f8e5d9c6f3d2.png', words:['Furina','Hydro','Regina'] },
+  raiden: { name: 'Raiden Shogun', bg: 'theme-raiden', img: 'Raiden-Shogun-PNG-HD-Image.png', words:['Raiden','Electro','Shogun'] },
+  furina: { name: 'Furina', bg: 'theme-furina', img: 'image (1).png', words:['Furina','Hydro','Regina'] },
   nahida: { name: 'Nahida', bg: 'theme-nahida', img: 'https://cdn.discordapp.com/attachments/86334567890123456/91345678901234567/nahida_render.png', words:['Nahida','Dendro','Sage'] },
 };
 

@@ -14,23 +14,26 @@
             position: relative;
             transition: background 0.8s ease;
             color: white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
         }
 
-        /* Dark Gradient Themes */
+        /* High-Contrast Dark Gradient Themes */
         .nahida-theme {
-            background: linear-gradient(135deg, #1a3a2a 0%, #0d1f15 100%);
+            background: linear-gradient(135deg, #0a3a1a 0%, #001f0d 100%);
         }
         .raiden-theme {
-            background: linear-gradient(135deg, #2a1a3a 0%, #150d1f 100%);
+            background: linear-gradient(135deg, #3a0a3a 0%, #1f001f 100%);
         }
         .furina-theme {
-            background: linear-gradient(135deg, #1a2a3a 0%, #0d151f 100%);
+            background: linear-gradient(135deg, #0a1a3a 0%, #000d1f 100%);
         }
 
         /* Character buttons */
         .character-buttons {
             position: fixed;
-            top: 20px;
+            top: 30px;
             left: 50%;
             transform: translateX(-50%);
             display: flex;
@@ -39,26 +42,29 @@
         }
 
         .char-btn {
-            background: rgba(0, 0, 0, 0.3);
-            border: 1px solid rgba(255, 255, 255, 0.2);
+            background: rgba(0, 0, 0, 0.5);
+            border: 1px solid rgba(255, 255, 255, 0.3);
             color: white;
-            padding: 8px 15px;
-            border-radius: 20px;
+            padding: 10px 20px;
+            border-radius: 25px;
             cursor: pointer;
             font-weight: bold;
+            font-size: 16px;
             transition: all 0.3s ease;
+            backdrop-filter: blur(5px);
         }
 
         .char-btn:hover {
-            background: rgba(255, 255, 255, 0.2);
+            background: rgba(255, 255, 255, 0.3);
         }
 
         .char-btn.active {
-            background: rgba(255, 255, 255, 0.4);
+            background: rgba(255, 255, 255, 0.5);
+            color: #111;
         }
 
         /* Character container */
-        .character-container {
+        .character-wrapper {
             position: absolute;
             width: 100%;
             height: 100%;
@@ -70,33 +76,43 @@
         /* Character image styling */
         .character-image {
             position: absolute;
-            max-width: 80%;
-            max-height: 80%;
-            opacity: 0.7;
+            max-width: 90%;
+            max-height: 90%;
+            opacity: 0.4;
             z-index: 1;
+            filter: brightness(1.1);
         }
 
-        /* Character content */
+        /* Character content - PERFECTLY CENTERED */
         .character-content {
-            position: absolute;
+            position: relative;
             z-index: 2;
             text-align: center;
-            text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.8);
-            width: 80%;
+            text-shadow: 3px 3px 10px rgba(0, 0, 0, 0.9);
+            width: 90%;
+            max-width: 800px;
+            padding: 30px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
         }
 
         .character-name {
-            font-size: 72px;
-            font-weight: bold;
+            font-size: 5rem;
+            font-weight: 900;
             text-transform: uppercase;
-            margin-bottom: 10px;
+            margin-bottom: 20px;
+            letter-spacing: 2px;
         }
 
         .character-desc {
-            font-size: 18px;
-            max-width: 600px;
-            margin: 0 auto;
-            line-height: 1.6;
+            font-size: 1.2rem;
+            line-height: 1.8;
+            background: rgba(0, 0, 0, 0.5);
+            padding: 20px;
+            border-radius: 15px;
+            backdrop-filter: blur(5px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
         }
 
         /* Animations */
@@ -109,21 +125,26 @@
         }
 
         @keyframes fadeIn {
-            0% { opacity: 0; }
-            100% { opacity: 1; }
+            0% { opacity: 0; transform: scale(0.95); }
+            100% { opacity: 1; transform: scale(1); }
         }
 
         @keyframes slideIn {
-            0% { transform: translateY(50px); opacity: 0; }
+            0% { transform: translateY(80px); opacity: 0; }
             100% { transform: translateY(0); opacity: 1; }
         }
 
-        /* Initially hide all characters except Nahida */
+        /* Character visibility */
         .character {
             display: none;
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            justify-content: center;
+            align-items: center;
         }
         .nahida {
-            display: block;
+            display: flex;
         }
     </style>
 </head>
@@ -135,16 +156,16 @@
         <button class="char-btn" data-char="furina">Furina</button>
     </div>
 
-    <!-- Character containers -->
-    <div class="character-container">
+    <!-- Character wrappers -->
+    <div class="character-wrapper">
         <!-- Nahida -->
         <div class="character nahida fade-in">
             <img src="Nahida-PNG-Pic.gif" alt="Nahida" class="character-image">
             <div class="character-content">
                 <div class="character-name">Nahida</div>
                 <div class="character-desc">
-                    Dendro Archon • Wisdom Incarnate • Catalyst User<br>
-                    The God of Wisdom's enemy is wisdom itself.<br>
+                    Dendro Archon • God of Wisdom • Catalyst User<br>
+                    The current Lesser Lord Kusanali of Sumeru<br>
                     "The world is like a huge, ever-changing dream."
                 </div>
             </div>
@@ -156,9 +177,9 @@
             <div class="character-content">
                 <div class="character-name">Raiden Shogun</div>
                 <div class="character-desc">
-                    Electro Archon • The Immovable Eternity • Polearm User<br>
-                    Her Excellency, the Almighty Narukami Ogosho.<br>
-                    "Eternity extends time indefinitely, but each moment within it becomes all the more fragile."
+                    Electro Archon • The Almighty Shogun • Polearm User<br>
+                    Ruler of the Inazuma Shogunate and Eternity's servant<br>
+                    "Seven ideals for seven gods, and of these, Eternity is nearest unto Heaven."
                 </div>
             </div>
         </div>
@@ -169,8 +190,8 @@
             <div class="character-content">
                 <div class="character-name">Furina</div>
                 <div class="character-desc">
-                    Hydro Archon • The God of Justice • Sword User<br>
-                    The flamboyant and dramatic ruler of Fontaine.<br>
+                    Hydro Archon • God of Justice • Sword User<br>
+                    The flamboyant and dramatic ruler of Fontaine<br>
                     "The court is now in session! Let us enjoy this performance to the fullest!"
                 </div>
             </div>
@@ -199,7 +220,7 @@
                 
                 // Show selected character with animation
                 const activeChar = document.querySelector(`.${charToShow}`);
-                activeChar.style.display = 'block';
+                activeChar.style.display = 'flex';
                 activeChar.classList.add(charToShow === 'raiden' ? 'slide-in' : 'fade-in');
                 
                 // Change theme

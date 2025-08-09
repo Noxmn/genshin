@@ -90,16 +90,16 @@
             width: auto;
             height: auto;
             max-width: 90%;
-            max-height: 80vh; /* Larger max height */
-            min-height: 50vh; /* Minimum height guarantee */
-            opacity: 0.6; /* More visible */
+            max-height: 80vh;
+            min-height: 50vh;
+            opacity: 0.6;
             z-index: 1;
             filter: brightness(1.1);
             object-fit: contain;
             object-position: center;
         }
 
-        /* Character content - Responsive */
+        /* Character content - SMALLER TEXT */
         .character-content {
             position: relative;
             z-index: 2;
@@ -111,27 +111,29 @@
             display: flex;
             flex-direction: column;
             align-items: center;
-            margin-top: 10vh; /* Push content down slightly */
+            margin-top: 10vh;
         }
 
+        /* SMALLER TITLE */
         .character-name {
-            font-size: clamp(2.5rem, 10vw, 5rem);
+            font-size: clamp(2rem, 8vw, 3.5rem); /* Reduced from 5rem */
             font-weight: 900;
             text-transform: uppercase;
-            margin-bottom: 15px;
+            margin-bottom: 10px; /* Reduced spacing */
             letter-spacing: 1px;
         }
 
+        /* SMALLER DESCRIPTION */
         .character-desc {
-            font-size: clamp(1rem, 3vw, 1.2rem);
-            line-height: 1.6;
+            font-size: clamp(0.9rem, 2.5vw, 1.1rem); /* Reduced size */
+            line-height: 1.5; /* Tighter spacing */
             background: rgba(0, 0, 0, 0.5);
-            padding: 15px;
+            padding: 12px 15px; /* Adjusted padding */
             border-radius: 15px;
             backdrop-filter: blur(5px);
             border: 1px solid rgba(255, 255, 255, 0.1);
             width: 100%;
-            max-width: 600px;
+            max-width: 500px; /* Narrower box */
         }
 
         /* Animations */
@@ -167,7 +169,7 @@
             display: flex;
         }
 
-        /* Mobile-specific adjustments */
+        /* Mobile adjustments */
         @media (max-width: 768px) {
             .character-buttons {
                 top: 10px;
@@ -178,19 +180,20 @@
                 min-width: 80px;
             }
             .character-image {
-                max-height: 70vh; /* Even larger on mobile */
+                max-height: 70vh;
                 max-width: 95%;
             }
             .character-content {
                 padding: 10px;
-                margin-top: 15vh; /* More space for image */
+                margin-top: 15vh;
             }
             .character-name {
-                margin-bottom: 10px;
+                margin-bottom: 8px;
+                font-size: clamp(1.8rem, 7vw, 3rem); /* Smaller on mobile */
             }
             .character-desc {
-                padding: 12px;
-                font-size: clamp(0.9rem, 3.5vw, 1.1rem);
+                padding: 10px 12px;
+                font-size: clamp(0.85rem, 2.2vw, 1rem);
             }
         }
 
@@ -201,20 +204,6 @@
             .character-image {
                 max-height: 65vh;
                 opacity: 0.7;
-            }
-            .character-desc {
-                line-height: 1.5;
-                padding: 10px;
-            }
-        }
-
-        /* Tablet-specific adjustments */
-        @media (min-width: 769px) and (max-width: 1024px) {
-            .character-image {
-                max-height: 75vh;
-            }
-            .character-content {
-                margin-top: 5vh;
             }
         }
     </style>

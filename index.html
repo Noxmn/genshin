@@ -1,96 +1,211 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Character Theme Switcher</title>
-<style>
-    body {
-        margin: 0;
-        padding: 0;
-        font-family: Arial, sans-serif;
-        text-align: center;
-        background-color: #0f0f0f;
-        color: white;
-        transition: background 0.5s, color 0.5s;
-    }
-    header {
-        padding: 20px;
-    }
-    .buttons {
-        margin-bottom: 20px;
-    }
-    .buttons button {
-        padding: 10px 20px;
-        margin: 5px;
-        border: none;
-        border-radius: 8px;
-        font-size: 16px;
-        cursor: pointer;
-        transition: background 0.3s;
-    }
-    .buttons button:hover {
-        opacity: 0.8;
-    }
-    .character img, .character video {
-        width: 60%;
-        max-width: 500px;
-        border-radius: 12px;
-        margin-top: 20px;
-        transition: all 0.3s;
-    }
-</style>
-</head>
-<body>
-
-<header>
-    <h1>Genshin Character Themes</h1>
-</header>
-
-<div class="buttons">
-    <button id="raidenBtn">Raiden Shogun</button>
-    <button id="furinaBtn">Furina</button>
-    <button id="nahidaBtn">Nahida</button>
-</div>
-
-<div class="character" id="characterDisplay">
-    <img src="Raiden-Shogun-PNG-HD-Image.png" alt="Raiden Shogun">
-</div>
-
-<script>
-    const characterDisplay = document.getElementById("characterDisplay");
-
-    const themes = {
-        raiden: {
-            bg: "#1a0033",
-            text: "white",
-            content: `<img src="Raiden-Shogun-PNG-HD-Image.png" alt="Raiden Shogun">`
-        },
-        furina: {
-            bg: "#003366",
-            text: "white",
-            content: `<img src="tumblr_19d2c72db0f3f0cb86b2728859d6d958_2c2fbab2_2048.png" alt="Furina">`
-        },
-        nahida: {
-            bg: "#004d00",
-            text: "white",
-            content: `<img src="Nahida-PNG-Pic.gif" alt="Nahida">`
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Genshin Impact Character Themes</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Arial', sans-serif;
+            height: 100vh;
+            overflow: hidden;
+            position: relative;
+            transition: background 0.8s ease;
+            color: white;
         }
-    };
 
-    function setTheme(theme) {
-        document.body.style.backgroundColor = themes[theme].bg;
-        document.body.style.color = themes[theme].text;
-        characterDisplay.innerHTML = themes[theme].content;
-    }
+        /* Dark Gradient Themes */
+        .nahida-theme {
+            background: linear-gradient(135deg, #1a3a2a 0%, #0d1f15 100%);
+        }
+        .raiden-theme {
+            background: linear-gradient(135deg, #2a1a3a 0%, #150d1f 100%);
+        }
+        .furina-theme {
+            background: linear-gradient(135deg, #1a2a3a 0%, #0d151f 100%);
+        }
 
-    document.getElementById("raidenBtn").addEventListener("click", () => setTheme("raiden"));
-    document.getElementById("furinaBtn").addEventListener("click", () => setTheme("furina"));
-    document.getElementById("nahidaBtn").addEventListener("click", () => setTheme("nahida"));
+        /* Character buttons */
+        .character-buttons {
+            position: fixed;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 15px;
+            z-index: 100;
+        }
 
-    // Default theme on load
-    setTheme("raiden");
-</script>
+        .char-btn {
+            background: rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            color: white;
+            padding: 8px 15px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: all 0.3s ease;
+        }
 
+        .char-btn:hover {
+            background: rgba(255, 255, 255, 0.2);
+        }
+
+        .char-btn.active {
+            background: rgba(255, 255, 255, 0.4);
+        }
+
+        /* Character container */
+        .character-container {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        /* Character image styling */
+        .character-image {
+            position: absolute;
+            max-width: 80%;
+            max-height: 80%;
+            opacity: 0.7;
+            z-index: 1;
+        }
+
+        /* Character content */
+        .character-content {
+            position: absolute;
+            z-index: 2;
+            text-align: center;
+            text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.8);
+            width: 80%;
+        }
+
+        .character-name {
+            font-size: 72px;
+            font-weight: bold;
+            text-transform: uppercase;
+            margin-bottom: 10px;
+        }
+
+        .character-desc {
+            font-size: 18px;
+            max-width: 600px;
+            margin: 0 auto;
+            line-height: 1.6;
+        }
+
+        /* Animations */
+        .fade-in {
+            animation: fadeIn 1.5s ease-in-out;
+        }
+
+        .slide-in {
+            animation: slideIn 1.5s ease-in-out;
+        }
+
+        @keyframes fadeIn {
+            0% { opacity: 0; }
+            100% { opacity: 1; }
+        }
+
+        @keyframes slideIn {
+            0% { transform: translateY(50px); opacity: 0; }
+            100% { transform: translateY(0); opacity: 1; }
+        }
+
+        /* Initially hide all characters except Nahida */
+        .character {
+            display: none;
+        }
+        .nahida {
+            display: block;
+        }
+    </style>
+</head>
+<body class="nahida-theme">
+    <!-- Character buttons -->
+    <div class="character-buttons">
+        <button class="char-btn active" data-char="nahida">Nahida</button>
+        <button class="char-btn" data-char="raiden">Raiden Shogun</button>
+        <button class="char-btn" data-char="furina">Furina</button>
+    </div>
+
+    <!-- Character containers -->
+    <div class="character-container">
+        <!-- Nahida -->
+        <div class="character nahida fade-in">
+            <img src="Nahida-PNG-Pic.gif" alt="Nahida" class="character-image">
+            <div class="character-content">
+                <div class="character-name">Nahida</div>
+                <div class="character-desc">
+                    Dendro Archon • Wisdom Incarnate • Catalyst User<br>
+                    The God of Wisdom's enemy is wisdom itself.<br>
+                    "The world is like a huge, ever-changing dream."
+                </div>
+            </div>
+        </div>
+
+        <!-- Raiden Shogun -->
+        <div class="character raiden">
+            <img src="Raiden-Shogun-PNG-HD-Image.png" alt="Raiden Shogun" class="character-image">
+            <div class="character-content">
+                <div class="character-name">Raiden Shogun</div>
+                <div class="character-desc">
+                    Electro Archon • The Immovable Eternity • Polearm User<br>
+                    Her Excellency, the Almighty Narukami Ogosho.<br>
+                    "Eternity extends time indefinitely, but each moment within it becomes all the more fragile."
+                </div>
+            </div>
+        </div>
+
+        <!-- Furina -->
+        <div class="character furina">
+            <img src="tumblr_19d2c72db0f3f0cb86b2728859d6d958_2c2fbab2_2048.png" alt="Furina" class="character-image">
+            <div class="character-content">
+                <div class="character-name">Furina</div>
+                <div class="character-desc">
+                    Hydro Archon • The God of Justice • Sword User<br>
+                    The flamboyant and dramatic ruler of Fontaine.<br>
+                    "The court is now in session! Let us enjoy this performance to the fullest!"
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const buttons = document.querySelectorAll('.char-btn');
+        const characters = document.querySelectorAll('.character');
+
+        buttons.forEach(button => {
+            button.addEventListener('click', () => {
+                // Remove active class from all buttons
+                buttons.forEach(btn => btn.classList.remove('active'));
+                // Add active class to clicked button
+                button.classList.add('active');
+                
+                // Get character to show
+                const charToShow = button.dataset.char;
+                
+                // Hide all characters
+                characters.forEach(char => {
+                    char.style.display = 'none';
+                    char.classList.remove('fade-in', 'slide-in');
+                });
+                
+                // Show selected character with animation
+                const activeChar = document.querySelector(`.${charToShow}`);
+                activeChar.style.display = 'block';
+                activeChar.classList.add(charToShow === 'raiden' ? 'slide-in' : 'fade-in');
+                
+                // Change theme
+                document.body.className = `${charToShow}-theme`;
+            });
+        });
+    </script>
 </body>
 </html>
